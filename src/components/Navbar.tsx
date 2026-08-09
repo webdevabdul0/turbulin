@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
@@ -32,12 +32,12 @@ const TurbulinLogo: React.FC<{ className?: string }> = ({ className = '' }) => (
 );
 
 type NavLink =
-  | { label: string; href: string; to?: never }
-  | { label: string; to: string; href?: never };
+  | { label: string; section: string; to?: never; href?: never }
+  | { label: string; to: string; section?: never; href?: never };
 
 const navLinks: NavLink[] = [
-  { label: 'Services', href: '/#services' },
-  { label: 'Projects', href: '/#projects' },
+  { label: 'Services', section: 'services' },
+  { label: 'Projects', section: 'projects' },
   { label: 'About', to: '/about' },
   { label: 'Contact', to: '/contact' },
 ];
@@ -46,7 +46,18 @@ export const Navbar: React.FC<NavbarProps> = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === '/';
+
+  const scrollToSection = (sectionId: string) => {
+    setMobileOpen(false);
+    if (isHome) {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      sessionStorage.setItem('scrollTarget', sectionId);
+      navigate('/');
+    }
+  };
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 30);
@@ -86,14 +97,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
                   {link.label}
                 </Link>
               ) : (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  style={{ fontFamily: 'var(--font)', color: 'rgba(255,255,255,0.75)' }}
+                <button
+                  key={link.section}
+                  onClick={() => scrollToSection(link.section!)}
+                  style={{ fontFamily: 'var(--font)', color: 'rgba(255,255,255,0.75)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                   className="text-sm font-medium tracking-wide hover:text-white transition-colors duration-200"
                 >
                   {link.label}
-                </a>
+                </button>
               )
             )}
           </nav>
@@ -138,15 +149,14 @@ export const Navbar: React.FC<NavbarProps> = () => {
                 {link.label}
               </Link>
             ) : (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                style={{ color: 'rgba(255,255,255,0.75)' }}
+              <button
+                key={link.section}
+                onClick={() => scrollToSection(link.section!)}
+                style={{ color: 'rgba(255,255,255,0.75)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                 className="block text-base font-medium tracking-wide hover:text-white transition-colors"
               >
                 {link.label}
-              </a>
+              </button>
             )
           )}
           <Link

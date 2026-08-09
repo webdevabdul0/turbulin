@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Mail, MapPin, Clock } from 'lucide-react';
 import { Footer } from '../components/Footer';
+import { useGsapReveal } from '../hooks/useGsapReveal';
 
 const serviceOptions = [
   'Product Engineering',
@@ -24,6 +25,11 @@ const labelStyle: React.CSSProperties = {
 };
 
 export const ContactPage: React.FC = () => {
+  const imageRef = useGsapReveal<HTMLDivElement>({ y: 30, duration: 1, start: 'top 95%' });
+  const headingRef = useGsapReveal<HTMLDivElement>({ stagger: 0.12, start: 'top 95%' });
+  const formRef = useGsapReveal<HTMLDivElement>({ y: 24, duration: 0.8, start: 'top 95%' });
+  const stripRef = useGsapReveal<HTMLDivElement>({ stagger: 0.12, start: 'top 92%' });
+
   const [formData, setFormData] = useState({
     service: '', goal: '', firstName: '', lastName: '', email: '', company: '', message: '',
   });
@@ -55,30 +61,37 @@ export const ContactPage: React.FC = () => {
         {/* Top: image + form side by side */}
         <div className="flex flex-col lg:flex-row">
 
-          {/* LEFT — image, matches form height */}
-          <div className="relative lg:w-1/2 h-72 lg:h-auto overflow-hidden">
-            <img
-              src="/assets/services/cloud-infrastructure.png"
-              alt="Turbulin — contact"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 100%)' }} />
-            <div className="absolute bottom-0 left-0 right-0 h-24 lg:hidden"
-              style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-dark))' }} />
+          {/* LEFT — image in a rounded card with margin */}
+          <div className="lg:w-1/2 flex items-center px-8 lg:px-10 py-10 lg:py-16">
+            <div ref={imageRef} className="relative w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '4/5' }}>
+              <img
+                src="/assets/services/cloud-infrastructure.png"
+                alt="Turbulin — contact"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 100%)' }} />
+            </div>
           </div>
 
           {/* RIGHT — heading + form only */}
-          <div className="lg:w-1/2 flex flex-col">
-          <div className="flex-1 px-8 lg:px-14 xl:px-20 pt-28 lg:pt-36 pb-16 space-y-12">
+          <div className="lg:w-1/2 flex flex-col relative">
+            {/* Glows */}
+            <div className="absolute top-[-60px] right-[-80px] w-[500px] h-[500px] pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at top right, rgba(255,141,0,0.18) 0%, rgba(255,141,0,0.06) 40%, transparent 70%)', filter: 'blur(50px)' }} />
+            <div className="absolute bottom-[10%] left-[-60px] w-[400px] h-[400px] pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at bottom left, rgba(255,20,10,0.15) 0%, rgba(255,20,10,0.05) 40%, transparent 70%)', filter: 'blur(50px)' }} />
+            <div className="absolute top-[40%] left-[30%] w-[350px] h-[350px] pointer-events-none"
+              style={{ background: 'radial-gradient(ellipse at center, rgba(255,80,0,0.1) 0%, transparent 65%)', filter: 'blur(60px)' }} />
+          <div className="flex-1 px-8 lg:px-14 xl:px-20 pt-28 lg:pt-36 pb-16 space-y-12 relative z-10">
 
             {/* Heading block */}
-            <div className="space-y-4">
-              <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-xs font-light tracking-[0.22em] uppercase">
+            <div ref={headingRef} className="space-y-4">
+              <span data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-xs font-light tracking-[0.22em] uppercase">
                 Get in touch
               </span>
-              <h1 style={{ color: 'var(--text-on-dark)' }}
-                className="text-4xl sm:text-5xl font-normal leading-[1.06] tracking-tight">
-                Let's get<br />
+              <h1 data-reveal style={{ color: 'var(--text-on-dark)' }}
+                className="text-5xl sm:text-6xl lg:text-7xl font-normal leading-[1.04] tracking-tight whitespace-nowrap">
+                Let's get{' '}
                 <span style={{
                   background: 'linear-gradient(135deg, #FF8D00, #FF140A)',
                   WebkitBackgroundClip: 'text',
@@ -88,14 +101,14 @@ export const ContactPage: React.FC = () => {
                   in touch.
                 </span>
               </h1>
-              <p style={{ color: 'var(--text-muted-on-dark)' }} className="text-base font-normal leading-relaxed max-w-sm">
+              <p data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-base font-normal leading-relaxed">
                 Whether you have a fully formed brief or just a rough idea — tell us what
                 you're trying to build. We'll respond within 24 hours.
               </p>
             </div>
 
             {/* Dark form */}
-            <div>
+            <div ref={formRef}>
               {submitted ? (
                 <div className="text-center py-20 space-y-6">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto"
@@ -236,8 +249,8 @@ export const ContactPage: React.FC = () => {
 
         {/* ── Full-width contact details strip ── */}
         <div style={{ borderTop: '1px solid #1e1e1e' }} className="px-8 lg:px-20 py-10">
-          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
-            <div className="flex items-center gap-4">
+          <div ref={stripRef} className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div data-reveal className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
                 <Mail className="w-4 h-4" style={{ color: '#FF8D00' }} />
@@ -250,7 +263,7 @@ export const ContactPage: React.FC = () => {
                 </a>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div data-reveal className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
                 <MapPin className="w-4 h-4" style={{ color: '#FF8D00' }} />
@@ -260,7 +273,7 @@ export const ContactPage: React.FC = () => {
                 <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">London, United Kingdom</span>
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div data-reveal className="flex items-center gap-4">
               <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                 style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
                 <Clock className="w-4 h-4" style={{ color: '#FF8D00' }} />
