@@ -122,7 +122,7 @@ export const ContactFormSection: React.FC = () => {
                   </div>
 
                   {/* First + Last name */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="block text-xs font-medium tracking-[0.12em] uppercase" style={{ color: '#888', fontFamily: 'var(--font)' }}>
                         First Name <span style={{ color: '#FF140A' }}>*</span>
@@ -150,7 +150,7 @@ export const ContactFormSection: React.FC = () => {
                   </div>
 
                   {/* Email + Company */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-1.5">
                       <label className="block text-xs font-medium tracking-[0.12em] uppercase" style={{ color: '#888', fontFamily: 'var(--font)' }}>
                         Email Address <span style={{ color: '#FF140A' }}>*</span>

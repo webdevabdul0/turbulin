@@ -85,7 +85,7 @@ export const StatsSection: React.FC = () => {
         </div>
 
         {/* Bottom row — stats full width */}
-        <div ref={statsRef} className="grid grid-cols-3 gap-x-12 gap-y-10"
+        <div ref={statsRef} className="grid grid-cols-1 sm:grid-cols-3 gap-x-12 gap-y-10"
           style={{ borderTop: '1px solid var(--border-light)', paddingTop: '3rem' }}
         >
           <StatItem end={7} suffix="+" label="Products live" desc="Real applications used by real people every day." />
