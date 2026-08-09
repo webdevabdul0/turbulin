@@ -50,24 +50,25 @@ export const ContactPage: React.FC = () => {
     <div style={{ backgroundColor: 'var(--bg-dark)', fontFamily: 'var(--font)' }} className="min-h-screen">
 
       {/* ── Split layout ── */}
-      <div className="flex flex-col lg:flex-row min-h-screen">
+      <div className="flex flex-col">
 
-        {/* LEFT — full image */}
-        <div className="relative lg:w-1/2 h-72 lg:h-auto lg:sticky lg:top-0 lg:self-start lg:min-h-screen overflow-hidden">
-          <img
-            src="/assets/services/cloud-infrastructure.png"
-            alt="Turbulin — contact"
-            className="w-full h-full object-cover"
-          />
-          {/* Dark overlay for depth */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 100%)' }} />
-          {/* Bottom fade on mobile */}
-          <div className="absolute bottom-0 left-0 right-0 h-24 lg:hidden"
-            style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-dark))' }} />
-        </div>
+        {/* Top: image + form side by side */}
+        <div className="flex flex-col lg:flex-row">
 
-        {/* RIGHT — heading + form + details */}
-        <div className="lg:w-1/2 flex flex-col">
+          {/* LEFT — image, matches form height */}
+          <div className="relative lg:w-1/2 h-72 lg:h-auto overflow-hidden">
+            <img
+              src="/assets/services/cloud-infrastructure.png"
+              alt="Turbulin — contact"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.1) 100%)' }} />
+            <div className="absolute bottom-0 left-0 right-0 h-24 lg:hidden"
+              style={{ background: 'linear-gradient(to bottom, transparent, var(--bg-dark))' }} />
+          </div>
+
+          {/* RIGHT — heading + form only */}
+          <div className="lg:w-1/2 flex flex-col">
           <div className="flex-1 px-8 lg:px-14 xl:px-20 pt-28 lg:pt-36 pb-16 space-y-12">
 
             {/* Heading block */}
@@ -229,50 +230,52 @@ export const ContactPage: React.FC = () => {
               )}
             </div>
 
-            {/* Contact details — below form */}
-            <div className="space-y-6 pt-4" style={{ borderTop: '1px solid #1e1e1e' }}>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
-                    <Mail className="w-4 h-4" style={{ color: '#FF8D00' }} />
-                  </div>
-                  <div>
-                    <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Email</div>
-                    <a href="mailto:hello@turbulin.io" style={{ color: 'var(--text-muted-on-dark)' }}
-                      className="text-sm font-normal hover:text-white transition-colors">
-                      hello@turbulin.io
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
-                    <MapPin className="w-4 h-4" style={{ color: '#FF8D00' }} />
-                  </div>
-                  <div>
-                    <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Location</div>
-                    <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">London, UK</span>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5"
-                    style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
-                    <Clock className="w-4 h-4" style={{ color: '#FF8D00' }} />
-                  </div>
-                  <div>
-                    <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Response time</div>
-                    <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">Within 24 hours</span>
-                  </div>
-                </div>
+          </div>
+          </div>
+        </div>
+
+        {/* ── Full-width contact details strip ── */}
+        <div style={{ borderTop: '1px solid #1e1e1e' }} className="px-8 lg:px-20 py-10">
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
+                <Mail className="w-4 h-4" style={{ color: '#FF8D00' }} />
+              </div>
+              <div>
+                <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Email</div>
+                <a href="mailto:hello@turbulin.io" style={{ color: 'var(--text-muted-on-dark)' }}
+                  className="text-sm font-normal hover:text-white transition-colors">
+                  hello@turbulin.io
+                </a>
               </div>
             </div>
-
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
+                <MapPin className="w-4 h-4" style={{ color: '#FF8D00' }} />
+              </div>
+              <div>
+                <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Location</div>
+                <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">London, United Kingdom</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: '#141414', border: '1px solid #242424' }}>
+                <Clock className="w-4 h-4" style={{ color: '#FF8D00' }} />
+              </div>
+              <div>
+                <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Response time</div>
+                <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">Within 24 hours</span>
+              </div>
+            </div>
           </div>
-          <Footer />
         </div>
 
       </div>
+
+      <Footer />
     </div>
   );
 };
