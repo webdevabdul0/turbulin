@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+:root {
+  --red: #FF140A;
+  --orange: #FF8D00;
+
+  /* Dark sections (hero, footer) */
+  --bg-dark: #0A0A0A;
+  --bg-dark-2: #111111;
+  --bg-dark-3: #181818;
+  --border-dark: #242424;
+  --text-on-dark: #F0F0F0;
+  --text-muted-on-dark: #7A7A7A;
+  --text-subtle-on-dark: #444444;
+
+  /* Light sections (body) */
+  --bg-light: #FFFFFF;
+  --bg-light-2: #F6F6F6;
+  --bg-light-3: #EFEFEF;
+  --border-light: #E4E4E4;
+  --text-on-light: #111111;
+  --text-muted-on-light: #666666;
+  --text-subtle-on-light: #AAAAAA;
+
+  /* Aliases — hero starts dark, body sections light */
+  --bg: #0A0A0A;
+  --bg-2: #111111;
+  --bg-3: #181818;
+  --border: #242424;
+  --text: #F0F0F0;
+  --text-muted: #7A7A7A;
+  --text-subtle: #444444;
+
+  --font: "Helvetica Now Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    font-weight: 500;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+/* Typography utilities */
+.font-display {
+  font-family: var(--font);
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gradient background */
+.bg-gradient-brand {
+  background: linear-gradient(135deg, var(--orange) 0%, var(--red) 100%);
+}
+
+/* Subtle grid overlay */
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #333; }
+
+/* Reveal animation initial state */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

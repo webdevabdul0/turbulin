@@ -1,0 +1,6 @@
+{
+  "name": "Systems Limited",
+  "description": "Recreation of Systems Limited landing page showcasing AI-native technology services, insights, statistics, partner alliances, and career opportunities.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
