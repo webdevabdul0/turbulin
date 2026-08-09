@@ -45,7 +45,6 @@ const services = [
 
 export const AboutPage: React.FC = () => {
   const heroTextRef = useGsapReveal<HTMLDivElement>({ stagger: 0.12, start: 'top 95%' });
-  const heroImgRef = useGsapReveal<HTMLDivElement>({ y: 24, duration: 0.9, start: 'top 95%' });
   const statsRef = useGsapReveal<HTMLDivElement>({ stagger: 0.1, start: 'top 90%' });
   const missionRef = useGsapReveal<HTMLDivElement>({ stagger: 0.15, start: 'top 88%' });
   const valuesHeadRef = useGsapReveal<HTMLDivElement>({ stagger: 0.12, start: 'top 88%' });
@@ -58,55 +57,49 @@ export const AboutPage: React.FC = () => {
     <div style={{ backgroundColor: 'var(--bg-dark)', fontFamily: 'var(--font)' }} className="min-h-screen">
 
       {/* ── HERO ── */}
-      <section className="relative pt-44 pb-28 overflow-hidden" style={{ backgroundColor: 'var(--bg-dark)' }}>
-        <div className="absolute top-[-120px] right-[-100px] w-[800px] h-[700px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at top right, rgba(255,141,0,0.11) 0%, transparent 65%)', filter: 'blur(50px)' }} />
-        <div className="absolute bottom-0 left-[-60px] w-[500px] h-[400px] pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse at bottom left, rgba(255,20,10,0.09) 0%, transparent 65%)', filter: 'blur(40px)' }} />
+      <section className="relative overflow-hidden" style={{ minHeight: '88vh' }}>
+        <img
+          src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1920&q=80"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.25) 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.25) 0%, transparent 40%, rgba(0,0,0,0.6) 100%)' }} />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-end">
-            <div ref={heroTextRef} className="lg:col-span-7 space-y-7">
-              <span data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-xs font-light tracking-[0.22em] uppercase">
-                About Turbulin
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex flex-col justify-end" style={{ minHeight: '88vh', paddingBottom: '6rem' }}>
+          <div ref={heroTextRef} className="max-w-2xl space-y-7">
+            <span data-reveal style={{ color: 'rgba(255,255,255,0.55)' }} className="text-xs font-light tracking-[0.22em] uppercase">
+              About Turbulin
+            </span>
+            <h1 data-reveal style={{ color: '#ffffff' }}
+              className="text-5xl sm:text-6xl lg:text-[76px] font-normal leading-[1.04] tracking-tight">
+              We build the tools<br />
+              <span style={{
+                background: 'linear-gradient(135deg, #FF8D00, #FF140A)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}>
+                people rely on.
               </span>
-              <h1 data-reveal style={{ color: 'var(--text-on-dark)' }}
-                className="text-5xl sm:text-6xl lg:text-[76px] font-normal leading-[1.04] tracking-tight">
-                We build the tools<br />
-                <span style={{
-                  background: 'linear-gradient(135deg, #FF8D00, #FF140A)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}>
-                  people rely on.
-                </span>
-              </h1>
-              <p data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-lg font-normal leading-relaxed max-w-lg">
-                Turbulin is a London-based digital product studio. We partner with founders,
-                businesses, and healthcare organisations to build software that works — cleanly,
-                reliably, and at pace.
-              </p>
-              <div data-reveal className="flex items-center gap-5 pt-1">
-                <Link to="/contact"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
-                  style={{ background: 'linear-gradient(135deg, #FF8D00, #FF140A)' }}>
-                  Start a project <ArrowRight className="w-4 h-4" />
-                </Link>
-                <a href="mailto:hello@turbulin.io"
-                  style={{ color: 'var(--text-muted-on-dark)' }}
-                  className="text-sm font-normal hover:text-white transition-colors flex items-center gap-1.5">
-                  hello@turbulin.io <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-            <div ref={heroImgRef} className="lg:col-span-5">
-              <div
-                className="relative w-full overflow-hidden rounded-2xl"
-                style={{ aspectRatio: '4/3', backgroundColor: 'var(--bg-dark-3)', border: '1px solid var(--border-dark)' }}
-              >
-                <img src="/assets/preview.jpg" alt="Turbulin studio" className="absolute inset-0 w-full h-full object-cover opacity-80" />
-              </div>
+            </h1>
+            <p data-reveal style={{ color: 'rgba(255,255,255,0.65)' }} className="text-lg font-normal leading-relaxed">
+              Turbulin is a London-based digital product studio. We partner with founders,
+              businesses, and healthcare organisations to build software that works — cleanly,
+              reliably, and at pace.
+            </p>
+            <div data-reveal className="flex items-center gap-5 pt-1">
+              <Link to="/contact"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-white text-sm font-semibold tracking-wide transition-opacity hover:opacity-90"
+                style={{ background: 'linear-gradient(135deg, #FF8D00, #FF140A)' }}>
+                Start a project <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a href="mailto:hello@turbulin.io"
+                style={{ color: 'rgba(255,255,255,0.6)' }}
+                className="text-sm font-normal hover:text-white transition-colors flex items-center gap-1.5">
+                hello@turbulin.io <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </div>

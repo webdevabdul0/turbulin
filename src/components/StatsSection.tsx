@@ -75,7 +75,7 @@ export const StatsSection: React.FC = () => {
             >
               {/* Image — absolute so it covers the placeholder below */}
               <img
-                src="/assets/preview.jpg"
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1400&q=80"
                 alt="Turbulin — product preview"
                 className="absolute inset-0 z-10 w-full h-full object-cover"
               />
