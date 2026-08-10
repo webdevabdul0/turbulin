@@ -50,7 +50,9 @@ export const Hero: React.FC = () => {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
+        disablePictureInPicture
+        controlsList="nodownload nofullscreen noremoteplayback"
+        className="absolute inset-0 w-full h-full object-cover pointer-events-none"
         style={{ zIndex: 0 }}
       >
         <source src="/hero-bg.mp4" type="video/mp4" />
