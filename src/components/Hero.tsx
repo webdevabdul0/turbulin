@@ -4,6 +4,15 @@ import { ArrowRight } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const vid = videoRef.current;
+    if (vid) {
+      vid.muted = true;
+      vid.play().catch(() => {});
+    }
+  }, []);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -46,6 +55,7 @@ export const Hero: React.FC = () => {
     >
       {/* Video background */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop
