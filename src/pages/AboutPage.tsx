@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { useGsapReveal } from '../hooks/useGsapReveal';
+import { CountUp, CountUpText, Eyebrow, SplitWords } from '../components/ui/motion';
 
 const stats = [
   { value: '7+', label: 'Products live', desc: 'Real applications used by real people every day.' },
@@ -113,7 +114,7 @@ export const AboutPage: React.FC = () => {
               <div data-reveal key={s.label} className="p-8 lg:p-10 space-y-2" style={{ backgroundColor: 'var(--bg-light)' }}>
                 <div style={{ fontFamily: 'var(--font)', background: 'linear-gradient(135deg, #FF8D00, #FF140A)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
                   className="text-5xl lg:text-6xl font-normal tracking-tight leading-none">
-                  {s.value}
+                  <CountUpText text={s.value} />
                 </div>
                 <div style={{ color: 'var(--text-on-light)' }} className="text-base font-medium">{s.label}</div>
                 <div style={{ color: 'var(--text-muted-on-light)' }} className="text-sm font-normal leading-relaxed">{s.desc}</div>
@@ -165,9 +166,10 @@ export const AboutPage: React.FC = () => {
       <section style={{ backgroundColor: 'var(--bg-light)', borderTop: '1px solid var(--border-light)' }} className="py-24">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div ref={valuesHeadRef} className="mb-14">
-            <span data-reveal style={{ color: 'var(--text-muted-on-light)' }} className="text-xs font-light tracking-[0.2em] uppercase">How we work</span>
-            <h2 data-reveal style={{ color: 'var(--text-on-light)' }} className="mt-4 text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
-              Principles we don't<br />negotiate on.
+            <Eyebrow>How we work</Eyebrow>
+            <h2 style={{ color: 'var(--text-on-light)' }} className="mt-5 text-3xl sm:text-4xl lg:text-5xl font-normal leading-tight tracking-tight">
+              <SplitWords>Principles we don't</SplitWords><br />
+              <SplitWords gradient delay={0.15}>negotiate on.</SplitWords>
             </h2>
           </div>
           <div ref={valuesGridRef} className="grid grid-cols-1 md:grid-cols-2 gap-px" style={{ backgroundColor: 'var(--border-light)' }}>
@@ -175,7 +177,7 @@ export const AboutPage: React.FC = () => {
               <div data-reveal key={v.n} className="p-10 space-y-4" style={{ backgroundColor: 'var(--bg-light)' }}>
                 <span style={{ background: 'linear-gradient(135deg, #FF8D00, #FF140A)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}
                   className="text-xs font-medium tracking-widest">
-                  {v.n}
+                  <CountUpText text={v.n} />
                 </span>
                 <h3 style={{ color: 'var(--text-on-light)' }} className="text-xl font-medium leading-snug">{v.title}</h3>
                 <p style={{ color: 'var(--text-muted-on-light)' }} className="text-base font-normal leading-relaxed">{v.body}</p>
@@ -190,9 +192,10 @@ export const AboutPage: React.FC = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             <div ref={servicesTextRef} className="lg:col-span-4 space-y-4">
-              <span data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-xs font-light tracking-[0.2em] uppercase">What we do</span>
-              <h2 data-reveal style={{ color: 'var(--text-on-dark)' }} className="text-3xl sm:text-4xl font-normal leading-tight tracking-tight">
-                Six practices, one team.
+              <Eyebrow tone="dark">What we do</Eyebrow>
+              <h2 style={{ color: 'var(--text-on-dark)' }} className="text-3xl sm:text-4xl font-normal leading-tight tracking-tight">
+                <SplitWords>Six practices,</SplitWords>{' '}
+                <SplitWords gradient delay={0.15}>one team.</SplitWords>
               </h2>
               <p data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-base font-normal leading-relaxed">
                 We don't outsource or subcontract. Every engagement is run by a dedicated team
@@ -222,14 +225,12 @@ export const AboutPage: React.FC = () => {
             <span data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-xs font-light tracking-[0.22em] uppercase">
               Ready to build?
             </span>
-            <h2 data-reveal style={{ color: 'var(--text-on-dark)' }} className="text-4xl sm:text-5xl lg:text-[60px] font-normal leading-[1.06] tracking-tight">
-              Let's build something<br />
-              <span style={{ background: 'linear-gradient(135deg, #FF8D00, #FF140A)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
-                worth using.
-              </span>
+            <h2 style={{ color: 'var(--text-on-dark)' }} className="text-4xl sm:text-5xl lg:text-[60px] font-normal leading-[1.06] tracking-tight">
+              <SplitWords>Let's build something</SplitWords><br />
+              <SplitWords gradient delay={0.2}>worth using.</SplitWords>
             </h2>
             <p data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-lg font-normal leading-relaxed">
-              Tell us what you're building. We'll respond within 24 hours.
+              Tell us what you're building. We'll respond within <CountUp value={24} /> hours.
             </p>
             <div data-reveal className="flex items-center justify-center gap-4 pt-2">
               <Link to="/contact"

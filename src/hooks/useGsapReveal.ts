@@ -6,6 +6,8 @@ gsap.registerPlugin(ScrollTrigger);
 
 interface RevealOptions {
   stagger?: number;
+  /** Blur (px) elements start from; 0 disables. */
+  blur?: number;
   y?: number;
   duration?: number;
   start?: string;
@@ -25,11 +27,13 @@ export function useGsapReveal<T extends HTMLElement>(options: RevealOptions = {}
       if (targets.length > 0) {
         gsap.fromTo(
           targets,
-          { y: options.y ?? 36, opacity: 0 },
+          { y: options.y ?? 36, opacity: 0, filter: `blur(${options.blur ?? 6}px)` },
           {
             y: 0,
             opacity: 1,
-            duration: options.duration ?? 0.75,
+            filter: 'blur(0px)',
+            clearProps: 'filter',
+            duration: options.duration ?? 0.9,
             stagger: options.stagger ?? 0.1,
             ease: 'power3.out',
             delay: options.delay ?? 0,

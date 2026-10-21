@@ -1,5 +1,6 @@
 import React from 'react';
 import { ArrowUp } from 'lucide-react';
+import { useGsapReveal } from '../hooks/useGsapReveal';
 
 const TurbulinMark: React.FC = () => (
   <svg viewBox="0 0 124 152" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-8 h-10">
@@ -17,6 +18,8 @@ const footerLinks = {
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  const colsRef = useGsapReveal<HTMLDivElement>({ stagger: 0.08, y: 24, start: 'top 92%' });
+  const markRef = useGsapReveal<HTMLDivElement>({ y: 120, blur: 12, duration: 1.4, start: 'top 98%' });
 
   return (
     <footer
@@ -25,7 +28,7 @@ export const Footer: React.FC = () => {
         borderTop: '1px solid var(--border-dark)',
         fontFamily: 'var(--font)',
       }}
-      className="relative pt-16 pb-8 overflow-hidden"
+      className="relative pt-16 pb-0 overflow-hidden"
     >
       {/* Footer glow accents */}
       <div
@@ -38,9 +41,9 @@ export const Footer: React.FC = () => {
       />
       <div className="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
         {/* Top row */}
-        <div className="grid grid-cols-2 lg:grid-cols-12 gap-10 pb-16" style={{ borderBottom: '1px solid var(--border-dark)' }}>
+        <div ref={colsRef} className="grid grid-cols-2 lg:grid-cols-12 gap-10 pb-16" style={{ borderBottom: '1px solid var(--border-dark)' }}>
           {/* Brand */}
-          <div className="col-span-2 lg:col-span-4 space-y-5">
+          <div data-reveal className="col-span-2 lg:col-span-4 space-y-5">
             <div className="flex items-center gap-3">
               <TurbulinMark />
               <div>
@@ -66,7 +69,7 @@ export const Footer: React.FC = () => {
 
           {/* Links */}
           {Object.entries(footerLinks).map(([group, links]) => (
-            <div key={group} className="lg:col-span-2 space-y-4">
+            <div key={group} data-reveal className="lg:col-span-2 space-y-4">
               <h5 style={{ color: 'var(--text-on-dark)' }} className="text-sm font-semibold tracking-[0.12em] uppercase">
                 {group}
               </h5>
@@ -104,6 +107,24 @@ export const Footer: React.FC = () => {
               </a>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* Giant wordmark rising out of the bottom edge */}
+      <div ref={markRef} className="relative mt-10 -mb-[0.22em] select-none pointer-events-none" aria-hidden="true">
+        <div
+          data-reveal
+          className="text-center font-normal leading-[0.8] tracking-[-0.05em] whitespace-nowrap"
+          style={{
+            fontFamily: 'var(--font)',
+            fontSize: 'clamp(88px, 23vw, 360px)',
+            background: 'linear-gradient(180deg, rgba(255,141,0,0.9) 0%, rgba(255,20,10,0.55) 45%, rgba(255,20,10,0) 92%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          turbulin
         </div>
       </div>
 

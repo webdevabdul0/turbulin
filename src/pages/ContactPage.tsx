@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2, Mail, MapPin, Clock } from 'lucide-react';
 import { Footer } from '../components/Footer';
 import { useGsapReveal } from '../hooks/useGsapReveal';
+import { CountUp } from '../components/ui/motion';
 
 const serviceOptions = [
   'Product Engineering',
@@ -103,7 +104,7 @@ export const ContactPage: React.FC = () => {
               </h1>
               <p data-reveal style={{ color: 'var(--text-muted-on-dark)' }} className="text-base font-normal leading-relaxed">
                 Whether you have a fully formed brief or just a rough idea — tell us what
-                you're trying to build. We'll respond within 24 hours.
+                you're trying to build. We'll respond within <CountUp value={24} /> hours.
               </p>
             </div>
 
@@ -280,7 +281,7 @@ export const ContactPage: React.FC = () => {
               </div>
               <div>
                 <div style={{ color: '#555' }} className="text-xs font-light tracking-wider uppercase mb-1">Response time</div>
-                <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">Within 24 hours</span>
+                <span style={{ color: 'var(--text-muted-on-dark)' }} className="text-sm font-normal">Within <CountUp value={24} /> hours</span>
               </div>
             </div>
           </div>

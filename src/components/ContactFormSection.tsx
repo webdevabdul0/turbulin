@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { useGsapReveal } from '../hooks/useGsapReveal';
+import { CountUp, Eyebrow, SplitWords } from './ui/motion';
 
 export const ContactFormSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ export const ContactFormSection: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const headerRef = useGsapReveal<HTMLDivElement>({ stagger: 0.1 });
+  const formRef = useGsapReveal<HTMLDivElement>({ y: 60, duration: 1.1, start: 'top 85%' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -38,33 +40,19 @@ export const ContactFormSection: React.FC = () => {
 
           {/* Left — heading */}
           <div ref={headerRef} className="lg:col-span-5 space-y-8 lg:pt-4">
-            <div data-reveal>
-              <span style={{ color: 'var(--text-muted-on-dark)', fontFamily: 'var(--font)' }}
-                className="text-xs font-light tracking-[0.2em] uppercase">
-                Start a project
-              </span>
-            </div>
+            <Eyebrow tone="dark">Start a project</Eyebrow>
 
-            <h2 data-reveal style={{ fontFamily: 'var(--font)' }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-tight">
-              <span style={{
-                background: 'linear-gradient(135deg, #FF8D00, #FF140A)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-              }}>
-                Let's build
-              </span>
-              <br />
-              <span className="text-white">something worth</span>
-              <br />
-              <span className="text-white">using.</span>
+            <h2 style={{ fontFamily: 'var(--font)' }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-normal leading-[1.08] tracking-tight text-white">
+              <SplitWords gradient>Let's build</SplitWords>{' '}
+              <SplitWords delay={0.15}>something worth using.</SplitWords>
             </h2>
 
             <p data-reveal style={{ color: 'var(--text-muted-on-dark)', fontFamily: 'var(--font)' }}
               className="text-lg font-normal leading-relaxed max-w-sm">
               Whether you have a fully formed brief or just a rough idea — tell us what you're
-              trying to build. We'll respond within 24 hours.
+              trying to build. We'll respond within{' '}
+              <CountUp value={24} className="text-white" /> hours.
             </p>
 
             <div data-reveal className="space-y-4 pt-2">
@@ -78,8 +66,9 @@ export const ContactFormSection: React.FC = () => {
           </div>
 
           {/* Right — form card */}
-          <div className="lg:col-span-7">
+          <div ref={formRef} className="lg:col-span-7">
             <div
+              data-reveal
               className="rounded-3xl p-8 lg:p-10"
               style={{
                 backgroundColor: '#ffffff',

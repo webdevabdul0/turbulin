@@ -3,6 +3,7 @@ import { Hero } from '../components/Hero';
 import { StatsSection } from '../components/StatsSection';
 import { OurServices } from '../components/OurServices';
 import { ProjectsSection } from '../components/ProjectsSection';
+import { AISection } from '../components/AISection';
 import { TechnologyAlliances } from '../components/TechnologyAlliances';
 import { CareersSection } from '../components/CareersSection';
 import { ContactFormSection } from '../components/ContactFormSection';
@@ -15,6 +16,7 @@ export const HomePage: React.FC = () => (
       <StatsSection />
       <OurServices />
       <ProjectsSection />
+      <AISection />
       <TechnologyAlliances />
       <CareersSection />
       <ContactFormSection />
